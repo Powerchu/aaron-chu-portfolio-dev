@@ -1,0 +1,173 @@
+[
+  {
+    "title": "Studio Brand Identity",
+    "slug": "projects/brand-identity",
+    "description": "Complete brand identity for a creative studio — logo, typography, color, and applications.",
+    "date": "2025-06-10T00:00:00.000Z",
+    "categories": [
+      "graphic-design"
+    ],
+    "tech": [
+      "Adobe Illustrator",
+      "Adobe InDesign",
+      "Figma"
+    ],
+    "hero": "/images/projects/studio-brand.jpg",
+    "screenshots": [],
+    "downloads": [],
+    "links": [
+      {
+        "label": "Behance",
+        "url": "https://behance.net"
+      }
+    ],
+    "featured": true,
+    "draft": false,
+    "note": "Designed a complete brand system used across web, print, physical collateral, and environmental signage.",
+    "metadata": {
+      "readingTime": 1,
+      "wordCount": 13
+    },
+    "content": "const{jsx:e}=arguments[0];function _createMdxContent(n){const t={p:\"p\",...n.components};return e(t.p,{children:\"A complete brand identity and design system created for an independent creative studio.\"})}return{default:function(n={}){const{wrapper:t}=n.components||{};return t?e(t,{...n,children:e(_createMdxContent,{...n})}):_createMdxContent(n)}};"
+  },
+  {
+    "title": "Echo Drift",
+    "slug": "projects/indie-game",
+    "description": "An atmospheric puzzle game about navigating fragmented memories and light refraction.",
+    "date": "2025-03-15T00:00:00.000Z",
+    "categories": [
+      "game-dev"
+    ],
+    "tech": [
+      "Unity",
+      "C#",
+      "Blender",
+      "HLSL"
+    ],
+    "hero": "/images/projects/echo-drift.jpg",
+    "video": "https://media.aaronchu.cc/projects/echo-drift/trailer.mp4",
+    "videoPoster": "https://media.aaronchu.cc/projects/echo-drift/trailer-poster.jpg",
+    "screenshots": [],
+    "downloads": [
+      {
+        "url": "https://media.aaronchu.cc/projects/echo-drift/build.zip",
+        "label": "Game build (WebGL / Mac)",
+        "size": "24.6 MB",
+        "type": "game"
+      }
+    ],
+    "links": [],
+    "featured": true,
+    "draft": false,
+    "note": "A solo-developed 4-hour puzzle game with original ambient soundtrack and custom volumetric lighting shaders.",
+    "metadata": {
+      "readingTime": 1,
+      "wordCount": 12
+    },
+    "content": "const{jsx:t}=arguments[0];function _createMdxContent(n){const e={p:\"p\",...n.components};return t(e.p,{children:\"An atmospheric physics puzzle adventure crafted with Unity and custom compute shaders.\"})}return{default:function(n={}){const{wrapper:e}=n.components||{};return e?t(e,{...n,children:t(_createMdxContent,{...n})}):_createMdxContent(n)}};"
+  },
+  {
+    "title": "Tokyo Nights",
+    "slug": "projects/photo-series",
+    "description": "A long-exposure photography series capturing Tokyo's rain-slicked alleys and neon signs.",
+    "date": "2024-11-20T00:00:00.000Z",
+    "categories": [
+      "photography"
+    ],
+    "tech": [
+      "Sony A7IV",
+      "35mm f/1.4 GM",
+      "Lightroom Classic"
+    ],
+    "hero": "/images/projects/tokyo-nights.jpg",
+    "screenshots": [
+      {
+        "src": "https://media.aaronchu.cc/projects/tokyo-nights/01.jpg",
+        "alt": "Shibuya crossing at midnight under rain",
+        "caption": "Crossing at 01:15 AM"
+      },
+      {
+        "src": "https://media.aaronchu.cc/projects/tokyo-nights/02.jpg",
+        "alt": "Golden Gai alleyway lantern glow",
+        "caption": "Narrow corridor in Shinjuku"
+      }
+    ],
+    "downloads": [],
+    "links": [],
+    "featured": true,
+    "draft": false,
+    "note": "30 photographs shot across 14 rainy nights in Tokyo's quieter backstreets, exhibited at a gallery showcase in 2024.",
+    "metadata": {
+      "readingTime": 1,
+      "wordCount": 11
+    },
+    "content": "const{jsx:n}=arguments[0];function _createMdxContent(t){const e={p:\"p\",...t.components};return n(e.p,{children:\"A documentary and fine-art photography exploration of Tokyo's nighttime luminescence.\"})}return{default:function(t={}){const{wrapper:e}=t.components||{};return e?n(e,{...t,children:n(_createMdxContent,{...t})}):_createMdxContent(t)}};"
+  },
+  {
+    "title": "Headless Portfolio CMS",
+    "slug": "projects/portfolio-cms",
+    "description": "A multi-tenant headless CMS for designers managing portfolio content at the edge.",
+    "date": "2025-12-15T00:00:00.000Z",
+    "categories": [
+      "full-stack"
+    ],
+    "tech": [
+      "Next.js",
+      "TypeScript",
+      "PostgreSQL",
+      "Cloudflare Workers",
+      "Hono"
+    ],
+    "hero": "/images/projects/portfolio-cms.jpg",
+    "screenshots": [],
+    "downloads": [],
+    "links": [
+      {
+        "label": "GitHub",
+        "url": "https://github.com/Powerchu/portfolio-cms"
+      }
+    ],
+    "featured": true,
+    "draft": false,
+    "note": "Built a multi-tenant CMS that handles 50+ designer portfolios with daily content updates and image transformations.",
+    "metadata": {
+      "readingTime": 1,
+      "wordCount": 13
+    },
+    "content": "const{jsx:t}=arguments[0];function _createMdxContent(e){const n={p:\"p\",...e.components};return t(n.p,{children:\"A multi-tenant headless CMS built for designers who update their portfolios daily.\"})}return{default:function(e={}){const{wrapper:n}=e.components||{};return n?t(n,{...e,children:t(_createMdxContent,{...e})}):_createMdxContent(e)}};"
+  },
+  {
+    "title": "RAG Assistant",
+    "slug": "projects/rag-assistant",
+    "description": "A retrieval-augmented generation assistant for legal document Q&A.",
+    "date": "2025-09-20T00:00:00.000Z",
+    "categories": [
+      "ai",
+      "full-stack"
+    ],
+    "tech": [
+      "Python",
+      "LangChain",
+      "OpenAI",
+      "pgvector",
+      "FastAPI"
+    ],
+    "hero": "/images/projects/rag-assistant.jpg",
+    "screenshots": [],
+    "downloads": [],
+    "links": [
+      {
+        "label": "GitHub",
+        "url": "https://github.com/Powerchu/rag-assistant"
+      }
+    ],
+    "featured": true,
+    "draft": false,
+    "note": "Built a production RAG system that handles 10K+ legal documents with 95% answer accuracy.",
+    "metadata": {
+      "readingTime": 1,
+      "wordCount": 16
+    },
+    "content": "const{jsx:e}=arguments[0];function _createMdxContent(n){const t={p:\"p\",...n.components};return e(t.p,{children:\"A high-performance retrieval-augmented generation assistant designed for legal research and contextual document Q&A.\"})}return{default:function(n={}){const{wrapper:t}=n.components||{};return t?e(t,{...n,children:e(_createMdxContent,{...n})}):_createMdxContent(n)}};"
+  }
+]

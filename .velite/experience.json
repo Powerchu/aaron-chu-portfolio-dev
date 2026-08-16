@@ -1,0 +1,60 @@
+[
+  {
+    "title": "AI Engineering Lead",
+    "company": "Neural Edge",
+    "companyUrl": "https://example.com",
+    "location": "San Francisco, CA (Remote)",
+    "start": "2024-06-01T00:00:00.000Z",
+    "summary": "Leading a team of 5 engineers building production agentic AI systems and edge inference pipelines.",
+    "highlights": [
+      "Designed and shipped a RAG system handling 10K+ documents with sub-200ms latency",
+      "Reduced inference costs by 40% through model quantization and intelligent semantic caching",
+      "Mentored team members and published technical architecture guides"
+    ],
+    "order": 0,
+    "metadata": {
+      "readingTime": 0,
+      "wordCount": 0
+    },
+    "content": ""
+  },
+  {
+    "title": "Creative Technologist & Game Developer",
+    "company": "Independent Studio",
+    "location": "Tokyo / Remote",
+    "start": "2020-01-01T00:00:00.000Z",
+    "end": "2022-02-28T00:00:00.000Z",
+    "summary": "Built interactive visual installations, shader prototypes, and independent game titles.",
+    "highlights": [
+      "Developed custom WebGL / GLSL shaders for interactive museum installations",
+      "Released independent title featured in Tokyo indie showcases",
+      "Collaborated with creative directors on typography and brand motion systems"
+    ],
+    "order": 2,
+    "metadata": {
+      "readingTime": 0,
+      "wordCount": 0
+    },
+    "content": ""
+  },
+  {
+    "title": "Senior Full Stack Engineer",
+    "company": "CloudScale Technologies",
+    "companyUrl": "https://example.com",
+    "location": "New York, NY",
+    "start": "2022-03-01T00:00:00.000Z",
+    "end": "2024-05-31T00:00:00.000Z",
+    "summary": "Led full-stack architecture across distributed edge worker runtimes and real-time collaboration apps.",
+    "highlights": [
+      "Architected distributed data sync engine deployed globally to Cloudflare edge nodes",
+      "Reduced deployment cycle times by 60% through automated preview pipelines",
+      "Maintained 99.99% uptime across critical multi-tenant services"
+    ],
+    "order": 1,
+    "metadata": {
+      "readingTime": 0,
+      "wordCount": 0
+    },
+    "content": ""
+  }
+]

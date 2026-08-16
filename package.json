@@ -4,8 +4,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
+    "dev": "concurrently \"velite build --watch\" \"next dev\"",
+    "build": "velite build && next build",
     "start": "next start",
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
