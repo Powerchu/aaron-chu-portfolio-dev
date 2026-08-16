@@ -14,7 +14,7 @@ const sample = {
   screenshots: [],
   downloads: [],
   links: [],
-  metadata: { readingTime: 1 },
+  metadata: { readingTime: 1, wordCount: 10 },
   content: '',
 }
 

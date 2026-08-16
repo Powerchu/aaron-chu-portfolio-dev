@@ -26,7 +26,7 @@ export async function createApp({ width, height, backgroundAlpha = 0, canvas }: 
     backgroundAlpha,
     antialias: true,
     powerPreference: 'high-performance',
-    preference: 'webgl2',
+    preference: 'webgl',
     resolution: Math.min(typeof window !== 'undefined' ? window.devicePixelRatio || 1 : 1, 2),
     autoDensity: true,
     canvas,
