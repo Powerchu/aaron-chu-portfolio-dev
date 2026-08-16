@@ -38,7 +38,7 @@ export function ThemeToggle() {
       type="button"
       onClick={toggle}
       aria-label="Toggle theme"
-      className="rounded-md p-2 hover:bg-black/5 dark:hover:bg-white/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#DF6C4F] focus-visible:ring-offset-2 transition-colors cursor-pointer"
+      className="rounded-md p-2.5 min-h-[44px] min-w-[44px] hover:bg-black/5 dark:hover:bg-white/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#DF6C4F] focus-visible:ring-offset-2 transition-colors cursor-pointer"
     >
       <FontAwesomeIcon icon={mounted && isDark ? faSun : faMoon} className="h-4 w-4" />
     </button>

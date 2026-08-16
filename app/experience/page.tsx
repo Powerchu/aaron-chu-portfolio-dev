@@ -13,7 +13,7 @@ export default function ExperiencePage() {
   })
 
   return (
-    <main className="mx-auto max-w-3xl px-6 py-16 md:px-12 md:py-24">
+    <main id="main" className="mx-auto max-w-3xl px-6 py-16 md:px-12 md:py-24">
       <h1 className="font-display text-5xl font-normal leading-[0.95] tracking-tight md:text-7xl">
         Experience
       </h1>
@@ -25,7 +25,7 @@ export default function ExperiencePage() {
         {entries.map((entry, i) => (
           <li key={i} className="relative">
             <div className="absolute -left-[31px] md:-left-[39px] top-1.5 h-3 w-3 rounded-full border-2 border-bg bg-[#DF6C4F]" />
-            <p className="text-xs font-extrabold uppercase tracking-wider text-[#DF6C4F]">
+            <p className="text-xs font-extrabold uppercase tracking-wider text-muted">
               {new Date(entry.start).getFullYear()} — {entry.end ? new Date(entry.end).getFullYear() : 'Present'}
             </p>
             <h2 className="mt-2 font-display text-2xl font-normal uppercase leading-tight md:text-3xl">

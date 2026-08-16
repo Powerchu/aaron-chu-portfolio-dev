@@ -37,11 +37,11 @@ export function ProjectCard({ project }: ProjectCardProps) {
             ))}
           </div>
 
-          <h3 className="font-display text-2xl font-normal uppercase leading-tight md:text-3xl text-fg">
+          <h2 className="font-display text-2xl font-normal uppercase leading-tight md:text-3xl text-fg">
             <span className="bg-gradient-to-r from-[#DF6C4F] to-[#DF6C4F] bg-[length:0%_2px] bg-left-bottom bg-no-repeat transition-[background-size] duration-300 group-hover:bg-[length:100%_2px]">
               {project.title}
             </span>
-          </h3>
+          </h2>
 
           <p className="mt-2 text-sm text-muted leading-relaxed line-clamp-2">
             {project.description}
