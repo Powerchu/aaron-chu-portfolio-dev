@@ -34,9 +34,35 @@ export const metadata: Metadata = {
   },
   description: siteConfig.description,
   metadataBase: new URL(siteConfig.url),
+  openGraph: {
+    title: siteConfig.title,
+    description: siteConfig.description,
+    url: siteConfig.url,
+    siteName: siteConfig.name,
+    images: [{ url: '/og', width: 1200, height: 630 }],
+    locale: siteConfig.locale,
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: siteConfig.title,
+    description: siteConfig.description,
+    images: ['/og'],
+  },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: siteConfig.author.name,
+    url: siteConfig.url,
+    email: siteConfig.author.email,
+    sameAs: [siteConfig.social.github, siteConfig.social.linkedin, siteConfig.social.instagram],
+    jobTitle: 'Software Engineer',
+    knowsAbout: siteConfig.keywords,
+  }
+
   return (
     <html
       lang="en"
@@ -45,6 +71,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     >
       <head>
         <ThemeScript />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
       </head>
       <body className="min-h-screen bg-bg font-sans text-fg antialiased flex flex-col justify-between">
         <Header />
