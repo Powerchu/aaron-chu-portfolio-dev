@@ -340,9 +340,209 @@ Reduced-motion is respected automatically by framer-motion.
 
 ## 10. Accessibility (non-negotiable)
 
+These rules are enforced in code review and verified in CI. Every task that ships UI must satisfy them.
+
+### Color contrast (WCAG 2.1 AA + AAA where noted)
+
+| Pair | Ratio | Status |
+|---|---|---|
+| `#0A0A0A` on `#FAFAFA` (primary text on bg, light) | ~17:1 | AAA pass |
+| `#FAFAFA` on `#0A0A0A` (primary text on bg, dark) | ~17:1 | AAA pass |
+| `#737373` on `#FAFAFA` (muted text on bg, light) | ~4.6:1 | AA pass |
+| `#A3A3A3` on `#0A0A0A` (muted text on bg, dark) | ~8:1 | AAA pass |
+| `#DF6C4F` (terracotta) on `#FAFAFA` (light bg) | ~3.4:1 | **AA Large text + non-text UI only.** ❌ Never for body copy under 18pt. |
+| `#DF6C4F` (terracotta) on `#0A0A0A` (dark bg) | ~3.5:1 | **AA Large text + non-text UI only.** ❌ Same restriction. |
+
+**Where terracotta is allowed:**
+- ✅ Display headings ≥18pt regular or ≥14pt bold
+- ✅ Buttons, focus rings, link underlines
+- ✅ Category chip borders, divider accents
+- ✅ Icon strokes on hover
+
+**Where terracotta is forbidden:**
+- ❌ Body text smaller than 18pt
+- ❌ Form labels
+- ❌ Muted UI text (timestamps, captions)
+
+### Touch targets (WCAG 2.2 AA — `web-target-size`)
+
+- **All interactive elements ≥ 24×24 CSS px** (WCAG 2.2 minimum).
+- **Buttons and primary actions ≥ 44×44 CSS px** (Apple HIG/Material baseline — what we hold ourselves to).
+- **Touch spacing**: minimum 8px between adjacent tap targets.
+- Implementation: every `<button>`, `<a>`, and clickable card in shadcn/ui gets `min-h-[44px]` or padded wrapper. `<ThemeToggle>` is the smallest icon-only button — wrap in `p-2` for a 36×36 hit area, or upgrade to `min-h-[44px] min-w-[44px]`.
+
+### Focus appearance (WCAG 2.2 AAA)
+
+- **Visible focus ring** on every focusable element: `focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg`.
+- **Focus indicator area** ≥ 3:1 contrast against adjacent surface. The terracotta ring on `#FAFAFA` is ~3.4:1 — passes.
+- **Focus indicator never removed** — `outline-none` is banned unless replaced by an explicit ring/underline.
+- **Focus-not-obscured (WCAG 2.2 AA)**: sticky UI must not hide the focused element. Set `html { scroll-padding-top: 80px }` (header height + buffer) so programmatic focus scrolls into view, not under the sticky Header.
+
+### Heading hierarchy
+
+- **One `<h1>` per page** (the page title; not the site name).
+- **Sequential nesting**: `<h2>` after `<h1>`, `<h3>` after `<h2>`. Never skip levels (`<h1>` → `<h3>` is a defect).
+- Decorative section labels are `<p>` or `<span>` with uppercase + tracking, NOT headings.
+
+### Skip-to-content
+
+- `<a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:rounded-md focus:bg-accent focus:px-4 focus:py-2 focus:text-accent-fg">Skip to content</a>`
+- First child of `<body>` in `app/layout.tsx`.
+- `<main id="main">` wraps page content.
+
+### Forms (WCAG 3.3.1)
+
+- **Visible labels for every field** — never placeholder-only. `<label for="email">` associated to `<input id="email" name="email">`.
+- **Inline error messages** tied to their field via `aria-describedby` AND `aria-invalid="true"` when validation fails.
+- **Error summary** at the top of the form on submit failure (one focusable element listing all errors with links to each field).
+- **Success state** uses an ARIA live region (`<div role="status" aria-live="polite">`) so screen readers announce it without moving focus.
+- The Turnstile widget is invisible by default (no extra UI) — verify it doesn't introduce unlabeled controls.
+
+### Reduced motion (WCAG 2.3.3)
+
+- **CSS-level kill switch** in `globals.css` (already present):
+  ```css
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+  ```
+- **JS-level** via framer-motion's `useReducedMotion()` — every motion primitive (`FadeIn`, `ScrollReveal`, `Stagger`, `ParallaxY`, `ParallaxMouse`, `DriftShape`) must call it and skip animation when true.
+- **PixiJS effects** detect reduced motion in `components/effects/*` and render a single static frame instead of starting the ticker loop (already implemented).
+- **Smooth scroll** (if added later via Lenis or `scroll-behavior: smooth`) must degrade to instant scroll on reduced motion.
+
+### Keyboard navigation
+
+- **Tab order matches visual order** — never reorder with `tabindex` positive values.
+- **Modal/Sheet focus trap**: shadcn/ui's `<Sheet>` handles focus trapping automatically; verify ESC closes.
+- **Theme toggle** is reachable by Tab and operable with Enter/Space (default `<button>` behavior).
+- **Skip links** appear before navigation in the tab order (see Skip-to-content above).
+
+### Screen reader / VoiceOver
+
+- **Icon-only buttons have `aria-label`** (already implemented on `<ThemeToggle>` — apply to all icon controls including CategoryChip if it becomes icon-only).
+- **Decorative icons** beside visible text are `aria-hidden="true"` (Font Awesome icons inherit this when the button has a text label).
+- **Image alt text**: meaningful images use descriptive `alt`; decorative images use empty `alt=""`. Project hero gets `<Image alt={project.title} />` — already implemented.
+- **Live regions** for form success/error (see Forms above).
+- **PixiJS canvases** are decorative — `aria-hidden="true"` (already implemented).
+
+### Color is never the only indicator
+
+- Category chips use **border + text label + icon**, never color alone.
+- Featured projects should add a non-color marker (a `FEATURED` badge or a star icon) — currently relies on positioning only.
+- Hover states change multiple properties (color + scale OR color + underline), not color alone.
+- Error states use icon + text + color (the field's red border AND the error message AND a warning icon).
+
+### Dynamic text size (WCAG 1.4.4)
+
+- **Body type in rem units** (already `text-base` → 1rem). Avoid fixed `px` for body copy.
+- **Layout must not break at 200% zoom** — verify by zooming browser to 200% and confirming nothing overflows or hides.
+- **`overflow-wrap: anywhere`** on URLs and long tokens in MDX content.
+
+### Loading & async feedback
+
+- **Form submission shows a loading state** — button disabled with spinner while `/api/contact` is in flight.
+- **No loading spinners for SSG-rendered pages** — instant load is the goal.
+- **PixiJS effect loads are progressive**: page renders without effects first, then effects mount and animate in. No spinners needed (effects mount in <100ms).
+
+### Sticky UI and overlays
+
+- **Header doesn't hide focused elements** — see focus-not-obscured above.
+- **Mobile Sheet nav** traps focus and returns focus to the trigger on close.
+- **Footer CTA** is reachable by keyboard.
+
+### Authentication (N/A for portfolio, but listed for completeness)
+
+- No login/auth in v1. If added later: paste-friendly, password-manager-friendly, no cognitive-only challenge.
+
 ---
 
-## 11. Tools & references used
+## 11. Design tokens
+
+Concrete, locked values for spacing, animation timing, icon sizing, borders, and shadows. Every component derives its values from these — no per-component magic numbers.
+
+### Spacing rhythm (8px base)
+
+| Token | px | Use for |
+|---|---|---|
+| `space-1` | 4 | Hairline gaps |
+| `space-2` | 8 | Inline icon-to-text gap |
+| `space-3` | 12 | Card internal padding (compact) |
+| `space-4` | 16 | Card internal padding (default) |
+| `space-6` | 24 | Section gaps within a page |
+| `space-8` | 32 | Section gaps between sections |
+| `space-12` | 48 | Page-level vertical rhythm |
+| `space-16` | 64 | Hero top/bottom padding |
+| `space-24` | 96 | Major page divisions (hero → content) |
+
+Tailwind defaults already cover this (`p-4`, `gap-6`, `py-24`, etc.) — this section just names the intent.
+
+### Animation timing
+
+| Token | Duration | Use for |
+|---|---|---|
+| `motion-fast` | 150ms | Hover state, theme toggle, button press |
+| `motion-base` | 250ms | Color transitions, dropdown menus |
+| `motion-slow` | 400ms | Page entrance, modal open |
+| `motion-slower` | 500ms | **Max** — anything longer feels sluggish |
+| `motion-ease-out` | `[0.22, 1, 0.36, 1]` | Entrance / arrival (decelerate) |
+| `motion-ease-in` | `[0.64, 0, 0.78, 0]` | Exit (accelerate away) |
+| `motion-spring` | damping 30, stiffness 200 | Mouse-follow, drag |
+
+### Icon sizes
+
+| Token | Class | Use for |
+|---|---|---|
+| `icon-xs` | `h-4 w-4` | Inline with body text (16px) |
+| `icon-sm` | `h-5 w-5` | Buttons, badges (20px) |
+| `icon-md` | `h-6 w-6` | Nav, social links (24px) |
+| `icon-lg` | `h-10 w-10` | Category strip (40px) |
+| `icon-xl` | `h-12 w-12` | Hero disciplines, feature blocks (48px) |
+
+Use Font Awesome's `className="h-X w-X"` consistently. Never mix `h-[18px]` and `h-5`.
+
+### Border radius
+
+| Token | Value | Use for |
+|---|---|---|
+| `radius-sm` | 4px | Tags, badges, small UI |
+| `radius-md` | 8px | Buttons, inputs |
+| `radius-lg` | 12px | Cards, large containers |
+| `radius-full` | 9999px | Pills, circular icons, avatars |
+
+### Borders
+
+| Token | Value | Use for |
+|---|---|---|
+| `border-hairline` | 1px solid `border` | Default dividers |
+| `border-prominent` | 2px solid `accent` | Focus rings, hover outlines |
+| `border-card` | 1px solid `border` | Card containers |
+
+### Shadows
+
+Minimalist palette uses **no shadows** by default. Elevation is communicated by borders + background contrast. Exception:
+- **Modal/Sheet scrim**: `bg-black/40 backdrop-blur-sm`
+- **Sticky header**: `bg-bg/80 backdrop-blur-md` + 1px border-bottom
+
+### Hover patterns (canonical)
+
+| Element | Hover | Active |
+|---|---|---|
+| Card | `scale(1 → 1.02)` + hero zoom | `scale(0.99)` |
+| Link | underline grows from left `scaleX(0 → 1)`, terracotta | same |
+| Button | `bg-accent/90` | `bg-accent/80` |
+| Icon button | `bg-fg/5` ring | `bg-fg/10` |
+| Nav link | `bg-fg/5` + `text-fg` (from `text-fg/80`) | same |
+
+All hover transitions: `150ms ease-out`. Active state: `100ms`.
+
+---
+
+## 12. Tools & references used
 
 - **Monopo London** (live, https://monopo.london/) — primary reference, screenshots in `.claude/monopo-screenshots/`
 - **Research reports** (already in `~/Downloads/inbox/`):
@@ -355,7 +555,7 @@ Reduced-motion is respected automatically by framer-motion.
 
 ---
 
-## 12. Open questions (visual scope)
+## 13. Open questions (visual scope)
 
 - [ ] Custom underline-on-link animation? (Default yes; terracotta, 200ms)
 - [ ] Theme toggle position — header icon only, or also a footer reset?
@@ -369,7 +569,7 @@ These are small enough to settle during implementation. Nothing here blocks writ
 
 ---
 
-## 13. Workflow: adding a project
+## 14. Workflow: adding a project
 
 ```
 1. Create content/projects/<slug>.mdx with frontmatter (title, slug, description, date, categories, tech, hero, links, ...)

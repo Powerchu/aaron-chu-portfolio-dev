@@ -2,6 +2,8 @@ import type { Metadata } from 'next'
 import { Inter, Inter_Tight, JetBrains_Mono } from 'next/font/google'
 import { ThemeScript } from '@/components/theme/ThemeScript'
 import { siteConfig } from '@/lib/siteConfig'
+import { Header } from '@/components/layout/Header'
+import { Footer } from '@/components/layout/Footer'
 import './globals.css'
 
 const interTight = Inter_Tight({
@@ -44,8 +46,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <ThemeScript />
       </head>
-      <body className="min-h-screen bg-bg font-sans text-fg antialiased">
-        {children}
+      <body className="min-h-screen bg-bg font-sans text-fg antialiased flex flex-col justify-between">
+        <Header />
+        <div className="flex-1">{children}</div>
+        <Footer />
       </body>
     </html>
   )
