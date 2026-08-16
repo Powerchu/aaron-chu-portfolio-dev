@@ -1,0 +1,23 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "aaron-chu-portfolio",
+  "pages_build_output_dir": ".open-next",
+  "compatibility_date": "2026-08-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "observability": {
+    "enabled": true
+  },
+  "upload_source_maps": true,
+  "kv_namespaces": [
+    { "binding": "VIEWS", "id": "PLACEHOLDER_KV_ID" }
+  ],
+  "r2_buckets": [
+    { "binding": "MEDIA", "bucket_name": "aaronchu-portfolio-media" }
+  ],
+  "send_email": [
+    { "name": "RESEND", "destination_address": "aaron_powerchu@hotmail.com" }
+  ],
+  "vars": {
+    "TURNSTILE_SITE_KEY": "PLACEHOLDER_PUBLIC_SITE_KEY"
+  }
+}
