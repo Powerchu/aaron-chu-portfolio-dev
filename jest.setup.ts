@@ -27,3 +27,8 @@ Object.defineProperty(window, 'ResizeObserver', {
   configurable: true,
   value: MockResizeObserver,
 })
+
+if (typeof window !== 'undefined' && HTMLCanvasElement.prototype.getContext === undefined) {
+  // @ts-expect-error Mocking getContext for jsdom
+  HTMLCanvasElement.prototype.getContext = jest.fn(() => null)
+}
