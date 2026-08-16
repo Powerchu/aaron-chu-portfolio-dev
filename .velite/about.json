@@ -1,0 +1,10 @@
+[
+  {
+    "title": "About",
+    "metadata": {
+      "readingTime": 1,
+      "wordCount": 92
+    },
+    "content": "const{Fragment:e,jsx:t,jsxs:n}=arguments[0];function _createMdxContent(i){const r={p:\"p\",...i.components};return n(e,{children:[t(r.p,{children:\"I'm Aaron Chu, a multi-disciplinary software engineer building thoughtful products at the edge. My work bridges full-stack application development, AI agent architecture, interactive graphics, game development, and photography.\"}),\"\\n\",t(r.p,{children:\"I believe software should be fast, resilient, and visually intentional. I specialize in TypeScript, Next.js, Cloudflare edge infrastructure, and real-time interactive experiences.\"}),\"\\n\",t(r.p,{children:\"This portfolio is designed and built from scratch as an edge-native system: Next.js App Router deployed to Cloudflare Pages via OpenNext, lightweight PixiJS WebGL shader enhancements, Velite typed MDX content, and Hono-powered API edge endpoints.\"})]})}return{default:function(e={}){const{wrapper:n}=e.components||{};return n?t(n,{...e,children:t(_createMdxContent,{...e})}):_createMdxContent(e)}};"
+  }
+]

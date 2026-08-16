@@ -9,3 +9,6 @@ export declare const projects: Project[]
 
 export type Experience = Collections['experience']['schema']['_output']
 export declare const experience: Experience[]
+
+export type About = Collections['about']['schema']['_output']
+export declare const about: About[]

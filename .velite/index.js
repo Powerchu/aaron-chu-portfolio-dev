@@ -2,3 +2,4 @@
 
 export { default as projects } from './projects.json' with { type: 'json' }
 export { default as experience } from './experience.json' with { type: 'json' }
+export { default as about } from './about.json' with { type: 'json' }

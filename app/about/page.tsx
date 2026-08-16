@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGithub, faLinkedin, faInstagram } from '@fortawesome/free-brands-svg-icons'
 import { siteConfig } from '@/lib/siteConfig'
+import { about } from '#site/content'
 
 export const metadata: Metadata = {
   title: 'About',
@@ -9,27 +10,17 @@ export const metadata: Metadata = {
 }
 
 export default function AboutPage() {
+  const aboutContent = about[0]
+  if (!aboutContent) return null
+
   return (
     <main className="mx-auto max-w-2xl px-6 py-16 md:px-12 md:py-24">
       <h1 className="font-display text-5xl font-normal leading-[0.95] tracking-tight md:text-7xl">
         About
       </h1>
 
-      <div className="mt-12 space-y-6 text-base text-fg/90 leading-relaxed">
-        <p>
-          I&apos;m {siteConfig.name}, a multi-disciplinary software engineer building thoughtful products
-          at the edge. My work bridges full-stack application development, AI agent architecture,
-          interactive graphics, game development, and photography.
-        </p>
-        <p>
-          I believe software should be fast, resilient, and visually intentional. I specialize in
-          TypeScript, Next.js, Cloudflare edge infrastructure, and real-time interactive experiences.
-        </p>
-        <p>
-          This portfolio is designed and built from scratch as an edge-native system: Next.js App Router
-          deployed to Cloudflare Pages via OpenNext, lightweight PixiJS WebGL shader enhancements,
-          Velite typed MDX content, and Hono-powered API edge endpoints.
-        </p>
+      <div className="prose prose-neutral dark:prose-invert mt-12 max-w-none space-y-6 text-base text-fg/90 leading-relaxed">
+        {aboutContent.content}
       </div>
 
       <div className="mt-12 pt-8 border-t border-[rgba(0,0,0,0.08)] dark:border-[rgba(255,255,255,0.08)]">
