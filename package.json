@@ -9,7 +9,7 @@
     "start": "next start",
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
-    "test:unit": "jest --forceExit",
+    "test:unit": "jest --forceExit --coverage",
     "test:e2e": "playwright test",
     "test": "npm run test:unit && npm run test:e2e",
     "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts",
