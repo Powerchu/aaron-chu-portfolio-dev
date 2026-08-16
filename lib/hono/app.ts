@@ -1,4 +1,5 @@
 import { Hono } from 'hono'
+import type { KVNamespace, SendEmail } from '@cloudflare/workers-types'
 import { contactRoute } from './routes/contact'
 import { viewsRoute } from './routes/views'
 import { log } from './middleware/log'

@@ -3,6 +3,7 @@
 import { useEffect, useRef } from 'react'
 import { useReducedMotion } from 'framer-motion'
 import { isWebGLSupported } from '@/lib/pixi/createApp'
+import type { Application } from 'pixi.js'
 
 interface GradientMeshProps {
   palette?: [string, string, string]
@@ -17,9 +18,9 @@ export function GradientMesh({ palette = ['#DF6C4F', '#0A0A0A', '#FAFAFA'] }: Gr
     if (!isWebGLSupported() || !ref.current || typeof window === 'undefined') return
 
     let cancelled = false
-    let appInstance: any = null
+    let appInstance: Application | null = null
 
-    ;(async () => {
+    void (async () => {
       try {
         const { createApp } = await import('@/lib/pixi/createApp')
         const { Graphics } = await import('pixi.js')
@@ -77,7 +78,9 @@ export function GradientMesh({ palette = ['#DF6C4F', '#0A0A0A', '#FAFAFA'] }: Gr
       if (appInstance) {
         try {
           appInstance.destroy(true)
-        } catch (_) {}
+        } catch {
+          // Ignore cleanup errors
+        }
       }
     }
   }, [reduced, palette])

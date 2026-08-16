@@ -1,7 +1,7 @@
 [
   {
     "title": "Studio Brand Identity",
-    "slug": "projects/brand-identity",
+    "slug": "brand-identity",
     "description": "Complete brand identity for a creative studio — logo, typography, color, and applications.",
     "date": "2025-06-10T00:00:00.000Z",
     "categories": [
@@ -32,7 +32,7 @@
   },
   {
     "title": "Echo Drift",
-    "slug": "projects/indie-game",
+    "slug": "indie-game",
     "description": "An atmospheric puzzle game about navigating fragmented memories and light refraction.",
     "date": "2025-03-15T00:00:00.000Z",
     "categories": [
@@ -68,7 +68,7 @@
   },
   {
     "title": "Tokyo Nights",
-    "slug": "projects/photo-series",
+    "slug": "photo-series",
     "description": "A long-exposure photography series capturing Tokyo's rain-slicked alleys and neon signs.",
     "date": "2024-11-20T00:00:00.000Z",
     "categories": [
@@ -105,7 +105,7 @@
   },
   {
     "title": "Headless Portfolio CMS",
-    "slug": "projects/portfolio-cms",
+    "slug": "portfolio-cms",
     "description": "A multi-tenant headless CMS for designers managing portfolio content at the edge.",
     "date": "2025-12-15T00:00:00.000Z",
     "categories": [
@@ -138,7 +138,7 @@
   },
   {
     "title": "RAG Assistant",
-    "slug": "projects/rag-assistant",
+    "slug": "rag-assistant",
     "description": "A retrieval-augmented generation assistant for legal document Q&A.",
     "date": "2025-09-20T00:00:00.000Z",
     "categories": [

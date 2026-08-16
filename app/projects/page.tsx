@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { projects } from '#site/content'
 import { ProjectFilter } from './ProjectFilter'
 import { ProjectGrid } from './ProjectGrid'
-import { categorySlugs, siteConfig, type CategorySlug } from '@/lib/siteConfig'
+import { categorySlugs, type CategorySlug } from '@/lib/siteConfig'
 
 interface PageProps {
   searchParams: Promise<{ category?: string }>

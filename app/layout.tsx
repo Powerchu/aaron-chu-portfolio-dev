@@ -63,6 +63,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     knowsAbout: siteConfig.keywords,
   }
 
+  const cfAnalyticsToken = process.env.NEXT_PUBLIC_CF_ANALYTICS_TOKEN
+
   return (
     <html
       lang="en"
@@ -75,6 +77,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
+        {cfAnalyticsToken && (
+          <script
+            defer
+            src="https://static.cloudflareinsights.com/beacon.min.js"
+            data-cf-beacon={`{"token": "${cfAnalyticsToken}"}`}
+          />
+        )}
       </head>
       <body className="min-h-screen bg-bg font-sans text-fg antialiased flex flex-col justify-between">
         <Header />

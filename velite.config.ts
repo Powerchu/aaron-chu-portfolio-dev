@@ -5,7 +5,7 @@ const projects = defineCollection({
   pattern: 'projects/*.mdx',
   schema: s.object({
     title: s.string(),
-    slug: s.path(),
+    slug: s.path().transform((p) => p.replace(/^projects\//, '')),
     description: s.string().max(280),
     date: s.isodate(),
     categories: s

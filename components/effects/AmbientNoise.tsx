@@ -2,7 +2,6 @@
 
 import { useEffect, useRef } from 'react'
 import { useReducedMotion } from 'framer-motion'
-import { isWebGLSupported } from '@/lib/pixi/createApp'
 
 interface AmbientNoiseProps {
   opacity?: number

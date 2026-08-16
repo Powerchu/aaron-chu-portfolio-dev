@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { projects } from '#site/content'
 import { DisciplinesStrip } from '@/components/home/DisciplinesStrip'
 import { ProjectCard } from '@/components/project/ProjectCard'
@@ -46,12 +47,12 @@ export default function HomePage() {
             <h2 className="font-display text-3xl font-normal uppercase leading-tight md:text-4xl">
               Featured Work
             </h2>
-            <a
+            <Link
               href="/projects"
               className="text-xs font-extrabold uppercase tracking-wider text-[#DF6C4F] hover:underline"
             >
               View all ({projects.length}) →
-            </a>
+            </Link>
           </div>
         </ScrollReveal>
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">

@@ -20,12 +20,16 @@ export function ThemeToggle() {
       document.documentElement.classList.add('dark')
       try {
         localStorage.setItem('theme', 'dark')
-      } catch (_) {}
+      } catch {
+        // Ignore localStorage errors in private mode
+      }
     } else {
       document.documentElement.classList.remove('dark')
       try {
         localStorage.setItem('theme', 'light')
-      } catch (_) {}
+      } catch {
+        // Ignore localStorage errors in private mode
+      }
     }
   }
 

@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import { experience } from '#site/content'
-import { siteConfig } from '@/lib/siteConfig'
 
 export const metadata: Metadata = {
   title: 'Experience',

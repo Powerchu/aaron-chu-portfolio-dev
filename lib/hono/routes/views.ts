@@ -1,4 +1,5 @@
 import { Hono } from 'hono'
+import type { KVNamespace } from '@cloudflare/workers-types'
 
 type Bindings = {
   VIEWS?: KVNamespace
