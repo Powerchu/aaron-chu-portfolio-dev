@@ -72,6 +72,16 @@ const experience = defineCollection({
   }),
 })
 
+const about = defineCollection({
+  name: 'About',
+  pattern: 'about.mdx',
+  schema: s.object({
+    title: s.string(),
+    metadata: s.metadata(),
+    content: s.mdx(),
+  }),
+})
+
 export default defineConfig({
   root: 'content',
   output: {
@@ -80,7 +90,7 @@ export default defineConfig({
     name: '[name]-[hash:6].[ext]',
     clean: true,
   },
-  collections: { projects, experience },
+  collections: { projects, experience, about },
   mdx: {
     gfm: true,
   },
