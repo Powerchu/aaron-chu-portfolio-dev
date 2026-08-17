@@ -1,30 +1,30 @@
 import type { Metadata } from 'next'
-import { Inter, Inter_Tight, JetBrains_Mono } from 'next/font/google'
+import localFont from 'next/font/local'
 import { ThemeScript } from '@/components/theme/ThemeScript'
 import { siteConfig } from '@/lib/siteConfig'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import './globals.css'
 
-const interTight = Inter_Tight({
-  subsets: ['latin'],
+const interTight = localFont({
+  src: [
+    { path: './fonts/InterTight-Regular.ttf', weight: '400', style: 'normal' },
+    { path: './fonts/InterTight-Bold.ttf', weight: '800', style: 'normal' },
+  ],
   variable: '--font-inter-tight',
   display: 'swap',
-  weight: ['400', '800'],
 })
 
-const inter = Inter({
-  subsets: ['latin'],
+const inter = localFont({
+  src: './fonts/InterVariable.woff2',
   variable: '--font-inter',
   display: 'swap',
-  weight: ['400', '800'],
 })
 
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ['latin'],
+const jetbrainsMono = localFont({
+  src: './fonts/JetBrainsMonoVariable.woff2',
   variable: '--font-jetbrains-mono',
   display: 'swap',
-  weight: ['400', '800'],
 })
 
 export const metadata: Metadata = {
@@ -86,6 +86,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         )}
       </head>
       <body className="min-h-screen bg-bg font-sans text-fg antialiased flex flex-col justify-between">
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:rounded-md focus:bg-accent focus:px-4 focus:py-2 focus:text-accent-fg"
+        >
+          Skip to content
+        </a>
         <Header />
         <div className="flex-1">{children}</div>
         <Footer />

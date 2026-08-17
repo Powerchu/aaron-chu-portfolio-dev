@@ -17,6 +17,7 @@ export function DisciplinesStrip() {
               <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-black/5 text-fg transition duration-200 group-hover:bg-[#DF6C4F]/10 group-hover:text-[#DF6C4F] dark:bg-white/5">
                 <FontAwesomeIcon
                   icon={cat.icon}
+                  aria-hidden="true"
                   className="h-5 w-5 transition"
                 />
               </div>

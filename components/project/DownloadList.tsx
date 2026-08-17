@@ -21,7 +21,7 @@ export function DownloadList({ downloads }: DownloadListProps) {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-lg border border-[rgba(0,0,0,0.12)] px-4 py-2.5 text-sm transition hover:border-[#DF6C4F] hover:text-[#DF6C4F] dark:border-[rgba(255,255,255,0.12)]"
             >
-              <FontAwesomeIcon icon={faDownload} className="h-3.5 w-3.5 text-[#DF6C4F]" />
+              <FontAwesomeIcon icon={faDownload} aria-hidden="true" className="h-4 w-4 text-[#DF6C4F]" />
               <span>{dl.label}</span>
               {dl.size && <span className="text-xs text-muted">({dl.size})</span>}
             </a>

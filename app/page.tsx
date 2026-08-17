@@ -15,7 +15,7 @@ export default function HomePage() {
     .slice(0, 3)
 
   return (
-    <main>
+    <main id="main">
       <section className="relative overflow-hidden min-h-[70vh] flex flex-col justify-center">
         <GradientMesh />
         <AmbientNoise />
@@ -49,7 +49,7 @@ export default function HomePage() {
             </h2>
             <Link
               href="/projects"
-              className="text-xs font-extrabold uppercase tracking-wider text-[#DF6C4F] hover:underline"
+              className="text-xs font-extrabold uppercase tracking-wider text-fg hover:text-accent transition-colors"
             >
               View all ({projects.length}) →
             </Link>

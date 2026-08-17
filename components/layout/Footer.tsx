@@ -17,7 +17,7 @@ export function Footer() {
             className="mt-6 inline-flex items-center gap-2 rounded-md bg-[#DF6C4F] px-6 py-3 text-xs font-extrabold uppercase tracking-wider text-white transition hover:bg-[#DF6C4F]/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#DF6C4F] focus-visible:ring-offset-2"
           >
             {siteConfig.author.email}
-            <FontAwesomeIcon icon={faArrowRight} className="h-3.5 w-3.5" />
+            <FontAwesomeIcon icon={faArrowRight} aria-hidden="true" className="h-4 w-4" />
           </Link>
         </div>
 
@@ -40,17 +40,17 @@ export function Footer() {
             <ul className="mt-3 space-y-2 text-sm">
               <li>
                 <a href={siteConfig.social.github} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 hover:text-[#DF6C4F] transition-colors">
-                  <FontAwesomeIcon icon={faGithub} className="h-4 w-4" /> GitHub
+                  <FontAwesomeIcon icon={faGithub} aria-hidden="true" className="h-4 w-4" /> GitHub
                 </a>
               </li>
               <li>
                 <a href={siteConfig.social.linkedin} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 hover:text-[#DF6C4F] transition-colors">
-                  <FontAwesomeIcon icon={faLinkedin} className="h-4 w-4" /> LinkedIn
+                  <FontAwesomeIcon icon={faLinkedin} aria-hidden="true" className="h-4 w-4" /> LinkedIn
                 </a>
               </li>
               <li>
                 <a href={siteConfig.social.instagram} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 hover:text-[#DF6C4F] transition-colors">
-                  <FontAwesomeIcon icon={faInstagram} className="h-4 w-4" /> Instagram
+                  <FontAwesomeIcon icon={faInstagram} aria-hidden="true" className="h-4 w-4" /> Instagram
                 </a>
               </li>
             </ul>
@@ -62,7 +62,7 @@ export function Footer() {
             </h3>
             <p className="mt-3 text-sm text-muted">
               Built with Next.js on Cloudflare Pages. Open source on{' '}
-              <a href={siteConfig.social.github} target="_blank" rel="noopener noreferrer" className="text-[#DF6C4F] hover:underline">
+              <a href={siteConfig.social.github} target="_blank" rel="noopener noreferrer" className="text-fg hover:text-accent transition-colors">
                 GitHub
               </a>.
             </p>
