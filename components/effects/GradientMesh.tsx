@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useReducedMotion } from 'framer-motion'
 import { isWebGLSupported } from '@/lib/pixi/createApp'
 import type { Application, Sprite } from 'pixi.js'
@@ -68,6 +68,10 @@ export function GradientMesh({ palette = ['#DF6C4F', '#0A0A0A', '#FAFAFA'] }: Gr
   const ref = useRef<HTMLCanvasElement>(null)
   const reduced = useReducedMotion()
   const paletteRef = useRef(palette)
+  // CSS-only fallback state: true when WebGL is unavailable OR PixiJS init
+  // throws. UIUX.md section 9 requires a static fallback in that path
+  // (no console output, no blank canvas).
+  const [useFallback, setUseFallback] = useState(false)
 
   // Keep paletteRef in sync with the prop so the ticker can read the latest value.
   useEffect(() => {
@@ -76,7 +80,14 @@ export function GradientMesh({ palette = ['#DF6C4F', '#0A0A0A', '#FAFAFA'] }: Gr
 
   useEffect(() => {
     if (reduced) return
-    if (!isWebGLSupported() || !ref.current || typeof window === 'undefined') return
+    if (typeof window === 'undefined') return
+    // UIUX.md: WebGL2 preferred, WebGL1 acceptable, no-WebGL → static
+    // fallback. We detect support up front and flip to the CSS fallback
+    // rather than rendering an empty canvas.
+    if (!isWebGLSupported() || !ref.current) {
+      setUseFallback(true)
+      return
+    }
 
     let cancelled = false
     let appInstance: Application | null = null
@@ -183,8 +194,15 @@ export function GradientMesh({ palette = ['#DF6C4F', '#0A0A0A', '#FAFAFA'] }: Gr
             sprites[i]!.y = basePositions[i]!.y + Math.cos(time * d[5] + d[3]) * d[1]
           }
         })
-      } catch (err) {
-        console.warn('PixiJS WebGL initialization fallback:', err)
+      } catch {
+        // PixiJS init failed (context lost, GPU blocked, etc.). Fall back
+        // to the CSS gradient below. Per UIUX.md, no console output here.
+        setUseFallback(true)
+        // Clean up the half-initialised app if it exists.
+        if (appInstance) {
+          try { appInstance.destroy(true) } catch { /* ignore */ }
+          appInstance = null
+        }
       }
     })()
 
@@ -203,6 +221,28 @@ export function GradientMesh({ palette = ['#DF6C4F', '#0A0A0A', '#FAFAFA'] }: Gr
   }, [reduced])
 
   if (reduced) return null
+
+  // CSS-only fallback: 3 radial gradients positioned in the same quadrants
+  // as the Pixi sprites, blended with 'screen' mix-blend-mode to mimic the
+  // additive composition of the WebGL effect.
+  if (useFallback) {
+    const [c0, c1, c2] = palette
+    return (
+      <div
+        aria-hidden="true"
+        className="pointer-events-none fixed inset-0 -z-20 h-full w-full opacity-60"
+        style={{
+          background: `
+            radial-gradient(60% 50% at 25% 35%, ${c0} 0%, transparent 60%),
+            radial-gradient(60% 50% at 75% 35%, ${c1} 0%, transparent 60%),
+            radial-gradient(60% 50% at 25% 65%, ${c2} 0%, transparent 60%),
+            radial-gradient(60% 50% at 75% 65%, ${c0} 0%, transparent 60%)
+          `,
+          mixBlendMode: 'screen',
+        }}
+      />
+    )
+  }
 
   return (
     <canvas

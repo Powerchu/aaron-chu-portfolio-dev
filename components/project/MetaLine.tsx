@@ -11,10 +11,12 @@ interface MetaLineProps {
 export function MetaLine({ category, tech, year, className = '' }: MetaLineProps) {
   const categories = Array.isArray(category) ? category : [category]
 
+  // .filter(Boolean) returns Array<string|undefined>; the explicit type
+  // predicate below narrows the union to string without needing a ! assertion.
   const categoryNames = categories
     .map((slug) => siteConfig.categories[slug]?.name)
-    .filter(Boolean)
-    .map((name) => name!.toUpperCase())
+    .filter((name): name is string => typeof name === 'string')
+    .map((name) => name.toUpperCase())
 
   const displayTech = tech.slice(0, 3).map((t) => t.toUpperCase())
 
