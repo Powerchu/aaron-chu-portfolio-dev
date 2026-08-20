@@ -13,10 +13,10 @@
     ],
     "order": 0,
     "metadata": {
-      "readingTime": 1,
-      "wordCount": 66
+      "readingTime": 0,
+      "wordCount": 0
     },
-    "content": "const{jsx:e}=arguments[0];function _createMdxContent(n){const t={p:\"p\",...n.components};return e(t.p,{children:\"As AI Engineering Lead at Neural Edge, I built and managed a team of five engineers delivering production-grade agentic AI systems. We designed retrieval-augmented generation pipelines handling tens of thousands of documents with sub-200ms latency, and deployed edge inference workloads across distributed infrastructure. The role combined hands-on architecture work with mentorship, technical writing, and cross-functional planning with product and research teams.\"})}return{default:function(n={}){const{wrapper:t}=n.components||{};return t?e(t,{...n,children:e(_createMdxContent,{...n})}):_createMdxContent(n)}};"
+    "content": ""
   },
   {
     "title": "Creative Technologist & Game Developer",
@@ -32,10 +32,10 @@
     ],
     "order": 2,
     "metadata": {
-      "readingTime": 1,
-      "wordCount": 54
+      "readingTime": 0,
+      "wordCount": 0
     },
-    "content": "const{jsx:e}=arguments[0];function _createMdxContent(n){const t={p:\"p\",...n.components};return e(t.p,{children:\"Working as a Creative Technologist and Game Developer at an independent studio, I built interactive visual installations, shader prototypes, and shipped an independent game title. The work blended creative coding with production engineering, from custom WebGL and GLSL shader pipelines for museum installations to collaborating with creative directors on motion systems and brand identity.\"})}return{default:function(n={}){const{wrapper:t}=n.components||{};return t?e(t,{...n,children:e(_createMdxContent,{...n})}):_createMdxContent(n)}};"
+    "content": ""
   },
   {
     "title": "Senior Full Stack Engineer",
@@ -52,9 +52,9 @@
     ],
     "order": 1,
     "metadata": {
-      "readingTime": 1,
-      "wordCount": 60
+      "readingTime": 0,
+      "wordCount": 0
     },
-    "content": "const{jsx:e}=arguments[0];function _createMdxContent(t){const n={p:\"p\",...t.components};return e(n.p,{children:\"At CloudScale Technologies I led full-stack architecture for distributed edge worker runtimes and real-time collaboration applications. I designed a globally distributed data sync engine, automated preview deployment pipelines that cut cycle times by 60%, and maintained 99.99% uptime across critical multi-tenant services. The platform team operated across time zones with a strong culture of documentation and blameless post-mortems.\"})}return{default:function(t={}){const{wrapper:n}=t.components||{};return n?e(n,{...t,children:e(_createMdxContent,{...t})}):_createMdxContent(t)}};"
+    "content": ""
   }
 ]
