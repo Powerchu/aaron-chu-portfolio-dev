@@ -31,6 +31,10 @@
   html {
     background-color: #FAFAFA;
     color: #0A0A0A;
+    /* WCAG 2.4.11: when keyboard focus jumps to an in-page anchor via
+       Tab navigation, ensure the focused element is not obscured by the
+       sticky Monopo header (~70px tall + 12px breathing room). */
+    scroll-padding-top: 80px;
   }
   html.dark {
     background-color: #0A0A0A;
@@ -188,8 +192,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 40px;
-    height: 40px;
+    /* WCAG 2.5.8: 44x44 minimum touch target for interactive controls. */
+    width: 44px;
+    height: 44px;
     margin-left: 1rem;
     background: none;
     border: none;

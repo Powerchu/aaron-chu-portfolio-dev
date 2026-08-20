@@ -13,7 +13,7 @@ export default function ExperiencePage() {
   })
 
   return (
-    <main className="mx-auto max-w-3xl px-6 py-16 md:px-12 md:py-24">
+    <main id="main" className="mx-auto max-w-3xl px-6 py-16 md:px-12 md:py-24">
       <h1 className="font-display text-5xl font-normal leading-[0.95] tracking-tight md:text-7xl">
         Experience
       </h1>

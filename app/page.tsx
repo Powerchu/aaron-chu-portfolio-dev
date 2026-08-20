@@ -15,7 +15,7 @@ export default function HomePage() {
     .slice(0, 3)
 
   return (
-    <main>
+    <main id="main">
       <section className="relative overflow-hidden min-h-[70vh] flex flex-col justify-center">
         <GradientMesh />
         <AmbientNoise />
