@@ -23,6 +23,8 @@
   --leading-display: 0.95;
   --leading-tight: 1.1;
   --leading-relaxed: 1.6;
+
+  --ease-snap: cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
 @layer base {
@@ -38,6 +40,9 @@
     font-family: var(--font-inter), system-ui, sans-serif;
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
+  }
+  *, *::before, *::after {
+    transition-timing-function: var(--ease-snap);
   }
 }
 
