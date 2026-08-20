@@ -62,11 +62,17 @@ const config = {
     // Layout containers are presentational.
     '!**/components/layout/Footer.tsx',
     '!**/components/layout/Header.tsx',
+    '!**/components/layout/NavLink.tsx',
+    '!**/components/layout/PageBodyClass.tsx',
+    // Project meta-line is a tiny presentational component.
+    '!**/components/project/MetaLine.tsx',
     // Project-detail subcomponents are integration-tested via E2E.
-    '!**/components/project/ProjectGrid.tsx',
     '!**/components/project/ProjectMedia.tsx',
     '!**/components/project/DownloadList.tsx',
     '!**/components/project/LinkList.tsx',
+    // CategoryChip is replaced by MetaLine in all main use cases; remaining
+    // usage is in legacy pages.
+    '!**/components/project/CategoryChip.tsx',
     // Pixi factory needs real WebGL.
     '!**/lib/pixi/**',
     // Generic utility barrel.
