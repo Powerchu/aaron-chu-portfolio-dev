@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { useCallback, useEffect, useState } from 'react'
 import { siteConfig } from '@/lib/siteConfig'
 import { NavLink } from './NavLink'
@@ -9,6 +10,7 @@ import { ThemeToggle } from '@/components/theme/ThemeToggle'
 export function Header() {
   const [isActive, setIsActive] = useState(false)
   const [isHome, setIsHome] = useState(false)
+  const pathname = usePathname()
 
   useEffect(() => {
     // Check initial body class
@@ -25,6 +27,12 @@ export function Header() {
     observer.observe(document.body, { attributes: true, attributeFilter: ['class'] })
     return () => observer.disconnect()
   }, [])
+
+  // Close the mobile menu on every route change so the burger resets to its
+  // 3-line state after tapping a nav link (Header persists across soft nav).
+  useEffect(() => {
+    setIsActive(false)
+  }, [pathname])
 
   const toggleMenu = useCallback(() => {
     setIsActive((prev) => !prev)
