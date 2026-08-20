@@ -54,3 +54,23 @@
     scroll-behavior: auto !important;
   }
 }
+
+/* ─── Monopo nav bullets ──────────────────────────────────────────── */
+/* CSS triangle (▶) sits left of nav link text, fades in on hover/active. */
+.c-Header-nav-link::before {
+  content: "";
+  display: inline-block;
+  height: 0;
+  width: 0;
+  border-top: 3px solid transparent;
+  border-bottom: 3px solid transparent;
+  border-left: 5px solid currentcolor;
+  margin-right: 7px;
+  opacity: 0;
+  transition: opacity 0.6s var(--ease-snap, cubic-bezier(0.165, 0.84, 0.44, 1));
+}
+
+.c-Header-nav-link:hover::before,
+.c-Header-nav-link[aria-current="page"]::before {
+  opacity: 1;
+}
