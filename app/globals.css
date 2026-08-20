@@ -41,6 +41,9 @@
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
   }
+  /* Project-wide default easing: --ease-snap
+     Extracted from monopo.london as the single motion curve used everywhere.
+     Individual components may override this on specific selectors if needed. */
   *, *::before, *::after {
     transition-timing-function: var(--ease-snap);
   }
