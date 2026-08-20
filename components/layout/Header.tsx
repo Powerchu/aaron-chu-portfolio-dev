@@ -9,24 +9,12 @@ import { ThemeToggle } from '@/components/theme/ThemeToggle'
 
 export function Header() {
   const [isActive, setIsActive] = useState(false)
-  const [isHome, setIsHome] = useState(false)
   const pathname = usePathname()
-
-  useEffect(() => {
-    // Check initial body class
-    setIsHome(document.body.classList.contains('is-home'))
-
-    // Watch for class changes on <body>
-    const observer = new MutationObserver((mutations) => {
-      for (const mutation of mutations) {
-        if (mutation.attributeName === 'class') {
-          setIsHome(document.body.classList.contains('is-home'))
-        }
-      }
-    })
-    observer.observe(document.body, { attributes: true, attributeFilter: ['class'] })
-    return () => observer.disconnect()
-  }, [])
+  // isHome is derived directly from the pathname. Reading it via usePathname
+  // (rather than sniffing document.body.classList in a useEffect) avoids
+  // the flash-of-wrong-header-state where Header would render c-Header--inner
+  // for one frame before PageBodyClass's effect catches up.
+  const isHome = pathname === siteConfig.nav.home
 
   // Close the mobile menu on every route change so the burger resets to its
   // 3-line state after tapping a nav link (Header persists across soft nav).
@@ -52,7 +40,7 @@ export function Header() {
         <Link
           href={siteConfig.nav.home}
           className="c-Header-logo"
-          aria-label={`${siteConfig.name} -- Home`}
+          aria-label={`${siteConfig.name} — Home`}
         >
           {siteConfig.name}
         </Link>
@@ -70,6 +58,7 @@ export function Header() {
           onClick={toggleMenu}
           aria-label="Toggle menu"
           aria-expanded={isActive}
+          aria-controls="mobile-nav"
         >
           <span className="c-Header-burger-icon">
             <span className="c-Header-burger-icon-line" />
@@ -77,6 +66,17 @@ export function Header() {
             <span className="c-Header-burger-icon-line" />
           </span>
         </button>
+      </div>
+
+      <div
+        id="mobile-nav"
+        className="c-Header-mobile-nav"
+        aria-hidden={!isActive}
+      >
+        <NavLink href={siteConfig.nav.projects}>Projects</NavLink>
+        <NavLink href={siteConfig.nav.experience}>Experience</NavLink>
+        <NavLink href={siteConfig.nav.about}>About</NavLink>
+        <ThemeToggle />
       </div>
     </header>
   )
