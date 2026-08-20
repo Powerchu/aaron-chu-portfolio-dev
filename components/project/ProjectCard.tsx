@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import type { Project } from '#site/content'
-import { CategoryChip } from './CategoryChip'
+import { MetaLine } from './MetaLine'
 
 interface ProjectCardProps {
   project: Project
@@ -31,11 +31,11 @@ export function ProjectCard({ project }: ProjectCardProps) {
         </div>
 
         <div className="p-6">
-          <div className="mb-3 flex flex-wrap gap-1.5">
-            {project.categories.map((cat) => (
-              <CategoryChip key={cat} category={cat} clickable={false} />
-            ))}
-          </div>
+          <MetaLine
+            category={project.categories}
+            tech={project.tech}
+            year={new Date(project.date).getFullYear().toString()}
+          />
 
           <h3 className="font-display text-2xl font-normal uppercase leading-tight md:text-3xl text-fg">
             <span className="bg-gradient-to-r from-[#DF6C4F] to-[#DF6C4F] bg-[length:0%_2px] bg-left-bottom bg-no-repeat transition-[background-size] duration-300 group-hover:bg-[length:100%_2px]">

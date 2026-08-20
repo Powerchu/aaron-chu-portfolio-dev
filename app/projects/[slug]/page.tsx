@@ -4,7 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { projects } from '#site/content'
 import { siteConfig } from '@/lib/siteConfig'
-import { CategoryChip } from '@/components/project/CategoryChip'
+import { MetaLine } from '@/components/project/MetaLine'
 import { ProjectMedia } from '@/components/project/ProjectMedia'
 import { DownloadList } from '@/components/project/DownloadList'
 import { LinkList } from '@/components/project/LinkList'
@@ -53,11 +53,11 @@ export default async function ProjectDetailPage({ params }: PageProps) {
       </Link>
 
       <header className="mt-8">
-        <div className="flex flex-wrap gap-1.5 mb-4">
-          {project.categories.map((cat) => (
-            <CategoryChip key={cat} category={cat} />
-          ))}
-        </div>
+        <MetaLine
+          category={project.categories}
+          tech={project.tech}
+          year={new Date(project.date).getFullYear().toString()}
+        />
         <h1 className="font-display text-4xl font-normal uppercase leading-tight sm:text-6xl md:text-7xl">
           {project.title}
         </h1>
