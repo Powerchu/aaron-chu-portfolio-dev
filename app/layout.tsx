@@ -4,6 +4,7 @@ import { ThemeScript } from '@/components/theme/ThemeScript'
 import { siteConfig } from '@/lib/siteConfig'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
+import { PageBodyClass } from '@/components/layout/PageBodyClass'
 import './globals.css'
 
 const interTight = Inter_Tight({
@@ -86,6 +87,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         )}
       </head>
       <body className="min-h-screen bg-bg font-sans text-fg antialiased flex flex-col justify-between">
+        <PageBodyClass />
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:rounded-md focus:bg-accent focus:px-4 focus:py-2 focus:text-accent-fg"
+        >
+          Skip to content
+        </a>
         <Header />
         <div className="flex-1">{children}</div>
         <Footer />
