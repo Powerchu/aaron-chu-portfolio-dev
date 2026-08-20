@@ -44,7 +44,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
   if (!project) notFound()
 
   return (
-    <main className="mx-auto max-w-5xl px-6 py-16 md:px-12 md:py-24">
+    <main id="main" className="mx-auto max-w-5xl px-6 py-16 md:px-12 md:py-24">
       <Link
         href="/projects"
         className="inline-flex items-center gap-1.5 text-xs font-extrabold uppercase tracking-wider text-muted hover:text-[#DF6C4F] transition-colors"
