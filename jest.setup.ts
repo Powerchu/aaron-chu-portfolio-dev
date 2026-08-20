@@ -1,4 +1,5 @@
 import '@testing-library/jest-dom'
+import { cleanup } from '@testing-library/react'
 import { TextEncoder, TextDecoder } from 'node:util'
 import { ReadableStream, WritableStream, TransformStream } from 'node:stream/web'
 import { MessageChannel, MessagePort } from 'node:worker_threads'
@@ -39,6 +40,13 @@ try {
 } catch (e) {
   console.error('Failed to polyfill undici fetch globals', e)
 }
+
+// After each test, unmount all React trees so MESSAGEPORT handles close.
+// Without this, React 18+'s scheduler keeps a message port open per render,
+// causing the Jest worker to hang until --forceExit kills it.
+afterEach(() => {
+  cleanup()
+})
 
 class MockIntersectionObserver implements IntersectionObserver {
   readonly root: Element | Document | null = null
