@@ -19,7 +19,7 @@ export function NavLink({ href, active, children, className = '' }: NavLinkProps
     <Link
       href={href}
       aria-current={isActive ? 'page' : undefined}
-      className={`rounded-md px-3 py-2 text-xs font-extrabold uppercase tracking-wider transition-colors border-b-2 ${
+      className={`c-Header-nav-link rounded-md px-3 py-2 text-xs font-extrabold uppercase tracking-wider transition-colors border-b-2 ${
         isActive
           ? 'border-accent text-fg'
           : 'border-transparent text-fg/80 hover:bg-black/5 hover:text-fg dark:hover:bg-white/5'
