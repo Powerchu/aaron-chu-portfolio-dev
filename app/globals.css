@@ -73,7 +73,8 @@
 .c-Header-nav-link:hover::before,
 .c-Header-nav-link[aria-current="page"]::before {
   opacity: 1;
-=======
+}
+
 /* ============================================================
    Monopo two-state header
    Absolute over hero on home, sticky/solid on inner pages.
