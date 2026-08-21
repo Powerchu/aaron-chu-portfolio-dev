@@ -23,12 +23,18 @@
   --leading-display: 0.95;
   --leading-tight: 1.1;
   --leading-relaxed: 1.6;
+
+  --ease-snap: cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
 @layer base {
   html {
     background-color: #FAFAFA;
     color: #0A0A0A;
+    /* WCAG 2.4.11: when keyboard focus jumps to an in-page anchor via
+       Tab navigation, ensure the focused element is not obscured by the
+       sticky Monopo header (~70px tall + 12px breathing room). */
+    scroll-padding-top: 80px;
   }
   html.dark {
     background-color: #0A0A0A;
@@ -39,6 +45,12 @@
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
   }
+  /* Project-wide default easing: --ease-snap
+     Extracted from monopo.london as the single motion curve used everywhere.
+     Individual components may override this on specific selectors if needed. */
+  *, *::before, *::after {
+    transition-timing-function: var(--ease-snap);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -47,5 +59,236 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+}
+
+/* ─── Monopo nav bullets ──────────────────────────────────────────── */
+/* CSS triangle (▶) sits left of nav link text, fades in on hover/active. */
+.c-Header-nav-link::before {
+  content: "";
+  display: inline-block;
+  height: 0;
+  width: 0;
+  border-top: 3px solid transparent;
+  border-bottom: 3px solid transparent;
+  border-left: 5px solid currentcolor;
+  margin-right: 7px;
+  opacity: 0;
+  transition: opacity 0.6s var(--ease-snap, cubic-bezier(0.165, 0.84, 0.44, 1));
+}
+
+.c-Header-nav-link:hover::before,
+.c-Header-nav-link[aria-current="page"]::before {
+  opacity: 1;
+}
+
+/* ============================================================
+   Monopo two-state header
+   Absolute over hero on home, sticky/solid on inner pages.
+   Easing: cubic-bezier(0.165, 0.84, 0.44, 1)
+   ============================================================ */
+
+@layer components {
+  /* --- Shared header shell --- */
+  .c-Header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 40;
+  }
+
+  .c-Header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 35px;
+    padding-bottom: 12px;
+    max-width: 72rem;
+    margin: 0 auto;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    transition:
+      background-color 0.6s cubic-bezier(0.165, 0.84, 0.44, 1),
+      color 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+  }
+
+  @media (min-width: 768px) {
+    .c-Header-container {
+      padding-left: 3rem;
+      padding-right: 3rem;
+    }
+  }
+
+  /* --- Home state: absolute transparent overlay --- */
+  .c-Header--home {
+    position: absolute;
+    background: transparent;
+    color: var(--color-fg);
+  }
+
+  .c-Header--home .c-Header-container {
+    background: transparent;
+  }
+
+  /* --- Inner page state: fixed sticky with solid background --- */
+  .c-Header--inner {
+    position: fixed;
+    background: var(--color-bg);
+    color: var(--color-fg);
+    border-bottom: 1px solid var(--color-border);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  .c-Header--inner .c-Header-container {
+    background: transparent;
+  }
+
+  /* Dark mode adjustments */
+  html.dark .c-Header--inner {
+    background: var(--color-bg-dark);
+    border-bottom-color: var(--color-border-dark);
+  }
+
+  /* --- Logo --- */
+  .c-Header-logo {
+    font-family: var(--font-inter-tight), system-ui, sans-serif;
+    font-size: 1.125rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: -0.04em;
+    color: inherit;
+    text-decoration: none;
+    cursor: pointer;
+    transition: opacity 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+  }
+
+  .c-Header-logo:hover {
+    opacity: 0.8;
+  }
+
+  .c-Header-logo:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--color-accent);
+    border-radius: 0.25rem;
+  }
+
+  /* --- Nav group --- */
+  .c-Header-nav-group {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+
+  @media (min-width: 640px) {
+    .c-Header-nav-group {
+      gap: 0.5rem;
+    }
+  }
+
+  /* --- Burger button --- */
+  .c-Header-burger {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* WCAG 2.5.8: 44x44 minimum touch target for interactive controls. */
+    width: 44px;
+    height: 44px;
+    margin-left: 1rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: inherit;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .c-Header-burger:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--color-accent);
+    border-radius: 0.25rem;
+  }
+
+  /* Burger icon: 3 lines */
+  .c-Header-burger-icon {
+    position: relative;
+    display: block;
+    width: 24px;
+    height: 12px;
+  }
+
+  .c-Header-burger-icon-line {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 1px;
+    background: currentcolor;
+    transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+  }
+
+  .c-Header-burger-icon-line:first-child {
+    left: 0;
+  }
+
+  .c-Header-burger-icon-line:nth-child(2) {
+    right: 0;
+  }
+
+  .c-Header-burger-icon-line:nth-child(3) {
+    right: 7px;
+  }
+
+  /* Burger animation: 3 lines to X */
+  .c-Header.is-active .c-Header-burger-icon-line:first-child {
+    transform: translateX(18px) rotate(45deg);
+  }
+
+  .c-Header.is-active .c-Header-burger-icon-line:nth-child(2) {
+    transform: translateX(-19px) rotate(-45deg);
+  }
+
+  .c-Header.is-active .c-Header-burger-icon-line:nth-child(3) {
+    opacity: 0;
+  }
+
+}
+
+/* --- Responsive behavior --- */
+/* Desktop (default): all nav links visible inline, mobile panel hidden. */
+.c-Header-mobile-nav { display: none; }
+
+/* Tablet/mobile: collapse inline nav links into a slide-down panel.
+   Burger becomes the only way to reach nav links. */
+@media (max-width: 640px) {
+  .c-Header-nav-group { display: none; }
+  .c-Header-burger { margin-left: auto; }
+
+  .c-Header-mobile-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1rem 1.5rem 1.5rem;
+    background: var(--color-bg);
+    color: var(--color-fg);
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+    transform: translateY(-100%);
+    opacity: 0;
+    pointer-events: none;
+    transition:
+      transform 0.6s var(--ease-snap),
+      opacity 0.4s var(--ease-snap);
+  }
+  html.dark .c-Header-mobile-nav {
+    background: var(--color-bg-dark);
+    color: var(--color-fg-dark);
+    border-top-color: var(--color-border-dark);
+    border-bottom-color: var(--color-border-dark);
+  }
+
+  .c-Header.is-active .c-Header-mobile-nav {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
   }
 }
