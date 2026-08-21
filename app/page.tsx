@@ -16,8 +16,11 @@ export default function HomePage() {
 
   return (
     <main id="main">
+      {/* GradientMesh is `position: fixed; inset: 0` and must escape the
+          hero section's `overflow-hidden` clipping, otherwise the canvas
+          is cropped to the section's bounding box and shows nothing. */}
+      <GradientMesh />
       <section className="relative overflow-hidden min-h-[70vh] flex flex-col justify-center">
-        <GradientMesh />
         <AmbientNoise />
         <DriftShape startX={-100} startY={50} size={400} />
         <DriftShape startX="70%" startY={200} size={300} color="#DF6C4F" opacity={0.03} />
